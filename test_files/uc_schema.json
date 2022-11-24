@@ -1,0 +1,346 @@
+{
+  "name": "flights",
+  "catalog_name": "deltasharing",
+  "schema_name": "airlinedata",
+  "table_type": "MANAGED",
+  "data_source_format": "DELTA",
+  "columns": [
+    {
+      "name": "Year",
+      "type_text": "int",
+      "type_json": "{\"name\":\"Year\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "INT",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 0,
+      "nullable": true
+    },
+    {
+      "name": "Month",
+      "type_text": "int",
+      "type_json": "{\"name\":\"Month\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "INT",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 1,
+      "nullable": true
+    },
+    {
+      "name": "DayofMonth",
+      "type_text": "int",
+      "type_json": "{\"name\":\"DayofMonth\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "INT",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 2,
+      "nullable": true
+    },
+    {
+      "name": "DayOfWeek",
+      "type_text": "int",
+      "type_json": "{\"name\":\"DayOfWeek\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "INT",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 3,
+      "nullable": true
+    },
+    {
+      "name": "DepTime",
+      "type_text": "string",
+      "type_json": "{\"name\":\"DepTime\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 4,
+      "nullable": true
+    },
+    {
+      "name": "CRSDepTime",
+      "type_text": "int",
+      "type_json": "{\"name\":\"CRSDepTime\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "INT",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 5,
+      "nullable": true
+    },
+    {
+      "name": "ArrTime",
+      "type_text": "string",
+      "type_json": "{\"name\":\"ArrTime\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 6,
+      "nullable": true
+    },
+    {
+      "name": "CRSArrTime",
+      "type_text": "int",
+      "type_json": "{\"name\":\"CRSArrTime\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "INT",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 7,
+      "nullable": true
+    },
+    {
+      "name": "UniqueCarrier",
+      "type_text": "string",
+      "type_json": "{\"name\":\"UniqueCarrier\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 8,
+      "nullable": true
+    },
+    {
+      "name": "FlightNum",
+      "type_text": "int",
+      "type_json": "{\"name\":\"FlightNum\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "INT",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 9,
+      "nullable": true
+    },
+    {
+      "name": "TailNum",
+      "type_text": "string",
+      "type_json": "{\"name\":\"TailNum\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 10,
+      "nullable": true
+    },
+    {
+      "name": "ActualElapsedTime",
+      "type_text": "string",
+      "type_json": "{\"name\":\"ActualElapsedTime\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 11,
+      "nullable": true
+    },
+    {
+      "name": "CRSElapsedTime",
+      "type_text": "int",
+      "type_json": "{\"name\":\"CRSElapsedTime\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "INT",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 12,
+      "nullable": true
+    },
+    {
+      "name": "AirTime",
+      "type_text": "string",
+      "type_json": "{\"name\":\"AirTime\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 13,
+      "nullable": true
+    },
+    {
+      "name": "ArrDelay",
+      "type_text": "string",
+      "type_json": "{\"name\":\"ArrDelay\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 14,
+      "nullable": true
+    },
+    {
+      "name": "DepDelay",
+      "type_text": "string",
+      "type_json": "{\"name\":\"DepDelay\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 15,
+      "nullable": true
+    },
+    {
+      "name": "Origin",
+      "type_text": "string",
+      "type_json": "{\"name\":\"Origin\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 16,
+      "nullable": true
+    },
+    {
+      "name": "Dest",
+      "type_text": "string",
+      "type_json": "{\"name\":\"Dest\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 17,
+      "nullable": true
+    },
+    {
+      "name": "Distance",
+      "type_text": "string",
+      "type_json": "{\"name\":\"Distance\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 18,
+      "nullable": true
+    },
+    {
+      "name": "TaxiIn",
+      "type_text": "string",
+      "type_json": "{\"name\":\"TaxiIn\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 19,
+      "nullable": true
+    },
+    {
+      "name": "TaxiOut",
+      "type_text": "string",
+      "type_json": "{\"name\":\"TaxiOut\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 20,
+      "nullable": true
+    },
+    {
+      "name": "Cancelled",
+      "type_text": "int",
+      "type_json": "{\"name\":\"Cancelled\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "INT",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 21,
+      "nullable": true
+    },
+    {
+      "name": "CancellationCode",
+      "type_text": "string",
+      "type_json": "{\"name\":\"CancellationCode\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 22,
+      "nullable": true
+    },
+    {
+      "name": "Diverted",
+      "type_text": "int",
+      "type_json": "{\"name\":\"Diverted\",\"type\":\"integer\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "INT",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 23,
+      "nullable": true
+    },
+    {
+      "name": "CarrierDelay",
+      "type_text": "string",
+      "type_json": "{\"name\":\"CarrierDelay\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 24,
+      "nullable": true
+    },
+    {
+      "name": "WeatherDelay",
+      "type_text": "string",
+      "type_json": "{\"name\":\"WeatherDelay\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 25,
+      "nullable": true
+    },
+    {
+      "name": "NASDelay",
+      "type_text": "string",
+      "type_json": "{\"name\":\"NASDelay\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 26,
+      "nullable": true
+    },
+    {
+      "name": "SecurityDelay",
+      "type_text": "string",
+      "type_json": "{\"name\":\"SecurityDelay\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 27,
+      "nullable": true
+    },
+    {
+      "name": "LateAircraftDelay",
+      "type_text": "string",
+      "type_json": "{\"name\":\"LateAircraftDelay\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 28,
+      "nullable": true
+    },
+    {
+      "name": "IsArrDelayed",
+      "type_text": "string",
+      "type_json": "{\"name\":\"IsArrDelayed\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 29,
+      "nullable": true
+    },
+    {
+      "name": "IsDepDelayed",
+      "type_text": "string",
+      "type_json": "{\"name\":\"IsDepDelayed\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 30,
+      "nullable": true
+    },
+    {
+      "name": "Date",
+      "type_text": "string",
+      "type_json": "{\"name\":\"Date\",\"type\":\"string\",\"nullable\":true,\"metadata\":{}}",
+      "type_name": "STRING",
+      "type_precision": 0,
+      "type_scale": 0,
+      "position": 31,
+      "nullable": true
+    }
+  ],
+  "storage_location": "s3://test/testdb/tables/test_table",
+  "owner": "account users",
+  "properties": {
+    "delta.lastCommitTimestamp": "1650651319000",
+    "delta.lastUpdateVersion": "0",
+    "delta.minReaderVersion": "1",
+    "delta.minWriterVersion": "2"
+  },
+  "generation": 1,
+  "metastore_id": "00000000-0000-0000-0000-000000000000",
+  "full_name": "deltasharing.airlinedata.flights",
+  "data_access_configuration_id": "00000000-0000-0000-0000-000000000000",
+  "created_at": 1650651321637,
+  "created_by": "test@test.com",
+  "updated_at": 1650651321894,
+  "updated_by": "test@test.com",
+  "table_id": "00000000-0000-0000-0000-000000000000"
+}

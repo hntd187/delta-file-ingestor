@@ -1,0 +1,31 @@
+[package]
+name = "delta-file-ingest"
+version = "0.1.0"
+edition = "2021"
+resolver = "2"
+
+
+[dependencies]
+anyhow = "^1"
+async-trait = "^0.1"
+clap = { version = "^4", features = ["color", "derive", "string"] }
+tokio = { version = "^1", features = ["full"] }
+tokio-stream = { version = "^0", features = ["fs"] }
+tokio-util = { version = "^0.7", features = ["full", "tracing"] }
+reqwest = { version = "^0", features = ["deflate"] }
+bytes = "^1"
+futures = "^0.3"
+deltalake = { git = "https://github.com/delta-io/delta-rs", features = ["s3"] }
+aws-sdk-sqs = "^0.21.0"
+aws-config = "^0.51"
+humantime = "^2"
+log = "^0"
+object_store = "^0.5"
+serde = { version = "^1", features = ["derive"] }
+serde_json = "^1"
+rocksdb = "^0.19"
+notify = "^5"
+itertools = "^0.10"
+
+[dev-dependencies]
+tempfile = "^3"
