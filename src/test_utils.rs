@@ -1,30 +1,25 @@
 use std::collections::HashMap;
 
 use anyhow::Result;
+use deltalake::{DeltaTable, DeltaTableBuilder, DeltaTableError, DeltaTableMetaData, Schema, SchemaDataType, SchemaField};
 use deltalake::action::Protocol;
-use deltalake::{
-    DeltaTable, DeltaTableBuilder, DeltaTableMetaData, Schema, SchemaDataType, SchemaField,
-};
 use object_store::path::Path;
 
 use crate::FileEvents;
 
 pub struct StaticFileEvents(pub Vec<Path>);
 
-#[async_trait::async_trait]
 impl FileEvents for StaticFileEvents {
     async fn next_file(&mut self) -> Result<Vec<Path>> {
         Ok(self.0.clone())
     }
 }
 
-pub fn create_bare_table() -> DeltaTable {
-    let table_dir = tempfile::tempdir().unwrap();
+pub fn create_bare_table() -> std::result::Result<DeltaTable, DeltaTableError> {
+    let table_dir = tempfile::tempdir_in("")?;
     let table_path = table_dir.path();
     dbg!(table_path);
-    DeltaTableBuilder::from_uri(table_path.to_str().unwrap())
-        .build()
-        .unwrap()
+    DeltaTableBuilder::from_uri(table_path.to_str().unwrap_or_default()).build()
 }
 
 pub fn test_type(name: &str, tpe: &str) -> SchemaField {
@@ -36,8 +31,8 @@ pub fn test_type(name: &str, tpe: &str) -> SchemaField {
     )
 }
 
-pub async fn create_initialized_table(partition_cols: &[String]) -> DeltaTable {
-    let mut table = create_bare_table();
+pub async fn create_initialized_table(partition_cols: &[String]) -> std::result::Result<DeltaTable, DeltaTableError> {
+    let mut table = create_bare_table()?;
     let table_schema = Schema::new(vec![
         test_type("id", "integer"),
         test_type("bool_col", "boolean"),
@@ -73,10 +68,7 @@ pub async fn create_initialized_table(partition_cols: &[String]) -> DeltaTable {
         HashMap::new(),
     );
 
-    table
-        .create(metadata, protocol, Some(commit_info), None)
-        .await
-        .unwrap();
+    table.create(metadata, protocol, Some(commit_info), None).await?;
 
-    table
+    Ok(table)
 }

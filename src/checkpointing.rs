@@ -2,7 +2,6 @@ use std::path::PathBuf;
 use std::sync::Arc;
 
 use anyhow::Result;
-use itertools::Itertools;
 use object_store::DynObjectStore;
 use rocksdb::{DB, Options};
 use rocksdb::checkpoint::Checkpoint;
@@ -19,6 +18,7 @@ pub struct Checkpoints {
 }
 
 impl Checkpoints {
+
     pub fn new(local_location: String, checkpoint_location: String, storage: Arc<DynObjectStore>) -> Result<Self> {
         let mut opts = Options::default();
         opts.create_if_missing(true);

@@ -43,7 +43,6 @@ impl LocalFileEvents {
     fn file_event(&self) {}
 }
 
-#[async_trait::async_trait]
 impl FileEvents for LocalFileEvents {
     async fn next_file(&mut self) -> Result<Vec<Path>> {
         if let Some(evt) = self.events.recv().await {

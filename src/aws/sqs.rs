@@ -17,7 +17,6 @@ impl SqsEvents {
     }
 }
 
-#[async_trait::async_trait]
 impl FileEvents for SqsEvents {
     async fn next_file(&mut self) -> Result<Vec<Path>> {
         let msg_que = self.client.receive_message().send().await?;

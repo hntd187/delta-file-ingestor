@@ -86,9 +86,7 @@ where
     }
 }
 
-fn create_parquet_reader<'rb>(
-    bytes: Bytes,
-) -> Result<impl Iterator<Item = ArrowResult<RecordBatch>>> {
+fn create_parquet_reader(bytes: Bytes) -> Result<impl Iterator<Item = ArrowResult<RecordBatch>>> {
     let mask = ProjectionMask::all();
     ParquetRecordBatchReaderBuilder::try_new(bytes)?
         .with_projection(mask)
@@ -96,7 +94,7 @@ fn create_parquet_reader<'rb>(
         .map_err(Into::into)
 }
 
-fn create_csv_reader(bytes: Bytes) -> Result<impl Iterator> {
+fn create_csv_reader(bytes: Bytes) -> Result<impl Iterator<Item = ArrowResult<RecordBatch>>> {
     let reader = Cursor::new(bytes);
     deltalake::arrow::csv::ReaderBuilder::new()
         .infer_schema(Some(100))
@@ -104,7 +102,7 @@ fn create_csv_reader(bytes: Bytes) -> Result<impl Iterator> {
         .map_err(Into::into)
 }
 
-fn create_json_reader(bytes: Bytes) -> Result<impl Iterator> {
+fn create_json_reader(bytes: Bytes) -> Result<impl Iterator<Item = ArrowResult<RecordBatch>>> {
     let reader = Cursor::new(bytes);
     deltalake::arrow::json::ReaderBuilder::new()
         .infer_schema(Some(100))
@@ -123,7 +121,7 @@ pub mod test {
 
     #[tokio::test]
     pub async fn test_processor() -> Result<()> {
-        let table = create_initialized_table(&[]).await;
+        let table = create_initialized_table(&[]).await?;
         let test_file = Path::from_filesystem_path("./test_files/alltypes_dictionary.parquet")?;
         let events = StaticFileEvents(vec![
             test_file.clone(),
