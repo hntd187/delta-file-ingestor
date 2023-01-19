@@ -1,5 +1,6 @@
-use super::*;
 use reqwest::{Client, Url};
+
+use super::*;
 
 #[derive(Debug, Clone)]
 pub struct UnityCatalogClient {
@@ -9,7 +10,7 @@ pub struct UnityCatalogClient {
 }
 
 impl UnityCatalogClient {
-    pub fn new(opts: UnityCatalogOptions) -> anyhow::Result<Self> {
+    pub fn new(opts: UnityCatalogOptions) -> Result<Self> {
         let api_client = Client::builder().deflate(true).build()?;
         let endpoint = Url::parse(&opts.db_api_host)?.join(API_PATH)?;
         Ok(Self {
@@ -18,11 +19,12 @@ impl UnityCatalogClient {
             endpoint,
         })
     }
+}
 
-    pub async fn get_table_schema(
-        &self,
-        table: String,
-    ) -> anyhow::Result<model::UnityCatalogSchema> {
+impl UnityCatalogApi for UnityCatalogClient {
+    async fn get_table_schema<T>(&self, table: T) -> Result<UnityCatalogSchema>
+        where T: fmt::Display {
+
         let full_name = format!(
             "{}.{}.{}",
             self.opts.default_catalog, self.opts.default_schema, table
@@ -34,7 +36,7 @@ impl UnityCatalogClient {
             .bearer_auth(&self.opts.db_api_token)
             .send()
             .await?
-            .json::<model::UnityCatalogSchema>()
+            .json::<UnityCatalogSchema>()
             .await
             .map_err(Into::into)
     }

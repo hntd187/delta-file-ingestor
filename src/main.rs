@@ -6,7 +6,7 @@ use delta_file_ingest::aws::sqs::SqsEvents;
 use delta_file_ingest::aws::SqsEventOptions;
 use delta_file_ingest::FileEvents;
 use delta_file_ingest::processor::{EventProcessor, EventProcessorOptions};
-use delta_file_ingest::uc::{UnityCatalogClient, UnityCatalogOptions};
+use delta_file_ingest::uc::{UnityCatalogApi, UnityCatalogClient, UnityCatalogOptions};
 
 #[derive(Clone, Debug, Parser)]
 #[command(author, version, about)]
@@ -16,8 +16,7 @@ pub struct RunOptions {
     // Event Processor Opts
     #[arg(long, default_missing_value = "10s")]
     poll_time: humantime::Duration,
-    #[arg(long)]
-    checkpoint_location: String,
+
     // UC Options
     #[arg(long)]
     db_api_host: String,
@@ -42,7 +41,6 @@ async fn main() -> anyhow::Result<()> {
         default_catalog,
         default_schema,
         queue_name,
-        checkpoint_location,
     } = RunOptions::parse();
     let queue_options = SqsEventOptions { queue_name };
     let uc_options = UnityCatalogOptions {
@@ -53,7 +51,6 @@ async fn main() -> anyhow::Result<()> {
     };
     let event_proc_options = EventProcessorOptions {
         poll_time: poll_time.as_secs(),
-        checkpoint_location,
     };
 
     let uc = UnityCatalogClient::new(uc_options)?;

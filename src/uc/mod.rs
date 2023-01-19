@@ -1,3 +1,8 @@
+use std::fmt;
+use anyhow::Result;
+pub use client::UnityCatalogClient;
+pub use model::*;
+
 mod client;
 mod model;
 
@@ -11,5 +16,8 @@ pub struct UnityCatalogOptions {
     pub default_schema: String,
 }
 
-pub use client::UnityCatalogClient;
-pub use model::*;
+pub trait UnityCatalogApi {
+    async fn get_table_schema<T>(&self, table: T) -> Result<UnityCatalogSchema>
+        where T: fmt::Display;
+}
+

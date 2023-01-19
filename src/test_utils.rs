@@ -3,6 +3,7 @@ use std::collections::HashMap;
 use anyhow::Result;
 use deltalake::{DeltaTable, DeltaTableBuilder, DeltaTableError, DeltaTableMetaData, Schema, SchemaDataType, SchemaField};
 use deltalake::action::Protocol;
+use deltalake::arrow::datatypes::{DataType, Field, TimeUnit};
 use object_store::path::Path;
 
 use crate::FileEvents;
@@ -33,17 +34,22 @@ pub fn test_type(name: &str, tpe: &str) -> SchemaField {
 
 pub async fn create_initialized_table(partition_cols: &[String]) -> std::result::Result<DeltaTable, DeltaTableError> {
     let mut table = create_bare_table()?;
+    let timestamp: Field =  Field::new("timestamp_col", DataType::Timestamp(TimeUnit::Microsecond, None), true);
+    let ts = SchemaField::try_from(&timestamp)?;
     let table_schema = Schema::new(vec![
         test_type("id", "integer"),
         test_type("bool_col", "boolean"),
-        test_type("tinyint_col", "integer"),
-        test_type("smallint_col", "integer"),
+        test_type("tinyint_col", "byte"),
+        test_type("smallint_col", "short"),
         test_type("int_col", "integer"),
         test_type("bigint_col", "long"),
         test_type("float_col", "float"),
         test_type("double_col", "double"),
-        test_type("date_string_col", "binary"),
-        test_type("string_col", "binary"),
+        test_type("date_string_col", "string"),
+        test_type("string_col", "string"),
+        ts,
+        test_type("year", "integer"),
+        test_type("month", "integer"),
     ]);
 
     let mut commit_info = serde_json::Map::<String, serde_json::Value>::new();

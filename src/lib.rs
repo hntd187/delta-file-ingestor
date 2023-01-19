@@ -4,7 +4,6 @@ use anyhow::Result;
 use object_store::path::Path;
 
 pub mod aws;
-pub mod checkpointing;
 pub mod local;
 pub mod processor;
 pub mod uc;

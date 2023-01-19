@@ -32,15 +32,13 @@ pub struct LocalFileEvents {
 }
 
 impl LocalFileEvents {
-    pub fn new(location: PathBuf) -> anyhow::Result<Self> {
+    pub fn new(location: PathBuf) -> Result<Self> {
         let (sender, events) = channel::<Event>(100);
         let callback = EventCallback { sender };
         let mut watcher = RecommendedWatcher::new(callback, Config::default())?;
         watcher.watch(location.as_path(), Recursive)?;
         Ok(Self { events, watcher })
     }
-
-    fn file_event(&self) {}
 }
 
 impl FileEvents for LocalFileEvents {
