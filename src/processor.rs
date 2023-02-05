@@ -8,11 +8,13 @@ use deltalake::action::{Action, DeltaOperation, SaveMode};
 use deltalake::arrow::{csv, json};
 use deltalake::arrow::error::Result as ArrowResult;
 use deltalake::arrow::record_batch::RecordBatch;
-use deltalake::parquet::arrow::arrow_reader::ParquetRecordBatchReaderBuilder;
 use deltalake::parquet::arrow::ProjectionMask;
+use deltalake::parquet::arrow::arrow_reader::ParquetRecordBatchReaderBuilder;
 use deltalake::writer::{DeltaWriter, RecordBatchWriter};
+use futures::{Stream, StreamExt, TryStreamExt};
 use object_store::{DynObjectStore, ObjectStore};
 use object_store::path::Path;
+use tokio_util::compat::*;
 
 use crate::FileEvents;
 
@@ -56,7 +58,7 @@ impl<F> EventProcessor<F>
             metadata.partition_columns.clone()
         };
         let obj_stream = self.storage.get(&file).await?;
-        let stream = self.create_parquet_reader(obj_stream.bytes().await?)?;
+        let stream = self.create_parquet_reader(obj_stream.bytes().await?).await?;
 
         let mut batch_writer = RecordBatchWriter::for_table(&self.table)?;
         for batch in stream {
@@ -90,12 +92,14 @@ impl<F> EventProcessor<F>
     }
 
 
-    fn create_parquet_reader(&self, bytes: Bytes) -> Result<impl Iterator<Item=ArrowResult<RecordBatch>>> {
+    async fn create_parquet_reader(&self, bytes: Bytes) -> Result<impl Iterator<Item=ArrowResult<RecordBatch>>> {
         let mask = ProjectionMask::all();
+
         ParquetRecordBatchReaderBuilder::try_new(bytes)?
             .with_projection(mask)
             .build()
             .map_err(Into::into)
+
     }
 
     #[allow(unused)]

@@ -7,6 +7,7 @@ pub mod aws;
 pub mod local;
 pub mod processor;
 pub mod uc;
+pub mod hdfs;
 
 #[cfg(test)]
 mod test_utils;
